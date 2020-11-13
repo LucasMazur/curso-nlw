@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{representante.name}} | Alumbra</title>
+  <link rel="icon" href="/images/apple-icon-57x57.png" />
+
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/sidebar.css" />
+  <link rel="stylesheet" href="/css/map.css" />
+  <link rel="stylesheet" href="/css/buttons.css" />
+  <link rel="stylesheet" href="/css/page-representante.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+</head>
+
+<body id="body">
+  <div id="page-representante">
+    <aside class="animate-right sidebar">
+      <img src="/images/logo-alumbra-menor.png" alt="">
+      <footer>
+        <button onclick="history.back()">
+          <img src="/images/arrow-back.svg" alt="">
+        </button>
+      </footer>
+    </aside>
+    <main class="animate-appear with-sidebar">
+      <div class="representante-details">
+        <img src="{{representante.firstImage}}" alt="" />
+        <div class="images">
+          {{#each representante.images}}
+          <button onclick="selectImage(event)" class="active" type="button">
+            <img src="{{this}}" alt="{{representante.name}}" />
+          </button>
+          {{/each}}
+
+
+        </div>
+        <div class="representante-details-content">
+          <h1>{{representante.name}}</h1>
+          <p>{{representante.about}}</p>
+          <div class="map-container">
+            <div id="mapid"></div>
+            <span data-lat="{{representante.lat}}" data-lng="{{representante.lng}}"></span>
+            <footer>
+              <a target="_blank"
+                href="https://maps.google.com/mobile?q={{representante.lat}},{{representante.lng}}&z=15">Ver fotos no
+                Google Maps</a>
+            </footer>
+          </div>
+
+          <hr />
+
+          <h2>Instruções</h2>
+          <p>{{representante.instructions}}</p>
+          <div class="open-details">
+            <div class="hours">
+              <img src="/images/clock.svg" alt="" />
+              {{representante.opening_hours}}
+            </div>
+            {{#if representante.open_on_weekends}}
+            <div class="open-on-weekends open">
+              <img src="/images/info.svg" alt="Informação" />
+              Atendemos aos fins de Semana
+            </div>
+            {{else}}
+            <div class="open-on-weekends closed">
+              <img src="/images/info-red.svg" alt="Informação" />
+              Não atendemos aos fins de Semana
+            </div>
+            {{/if}}
+
+          </div>
+
+          <a href="https://api.whatsapp.com/send?1=pt_BR&phone={{representante.whatsapp}}" target="_blank"
+            class="primary-button" type="button">
+            <img src="/images/whatsapp.svg" alt="Chamar no whatsapp" />
+            Entrar em Contato
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/scripts/page-representante.js"></script>
+</body>
+
+</html>
